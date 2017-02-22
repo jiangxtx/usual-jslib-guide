@@ -1,0 +1,27 @@
+{
+  "name": "usual-jslib-guide",
+  "version": "1.0.0",
+  "description": "a usually used third-part JS library for study and guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangxtx/usual-jslib-guide.git"
+  },
+  "keywords": [
+    "3th-part-JS-library",
+    "guide"
+  ],
+  "author": "jiangxtx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiangxtx/usual-jslib-guide/issues"
+  },
+  "homepage": "https://github.com/jiangxtx/usual-jslib-guide#readme",
+  "dependencies": {
+    "move-js": "^0.5.0",
+    "normalizr": "^3.2.1"
+  }
+}
