@@ -2,10 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Move.js</title>
-    <script src="../node_modules/move-js/move.min.js"></script>
+    <title>Move.js anamate CSS Demo</title>
+    <style>
+        .square {
+            display: block;
+            border: 1px solid #888;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            color: #fff;
+        }
+        #rotate {
+            margin-top: 50px;
+            border: 1px solid #e0e0e0;
+        }
+    </style>
 </head>
 <body>
+
+<h1>Note that:</h1>
+<p>File move.js should be placed after DOM. Otherwise, it could be error:
+    Error info: <em>style undefined.</em>
+</p>
+
+<h2>Square Action:</h2>
+<div id="square" class="square">Look at Me!!</div>
+
+<h2>Rotate <sub><button onclick="rotate();">PLAY</button></sub></h2>
+<div id="rotate" >
+    <span class="square">Rotate BOX</span>
+</div>
+
+<h3>
+    <a href="http://visionmedia.github.io/move.js/" target="_blank">Move.js online demo & API</a>
+</h3>
+
+<!-- Note that this js file must in the end of DOM -->
+<script src="../lib/move.js"></script>
+
+<script>
+
+    move('#square')
+        .x(500)
+        .y(200)
+        .ease('in-out')
+        .then()
+            .x(-500)
+            .then()
+                .y(-200)
+                .duration('2s')
+                .delay('.5s')
+                .rotate(180)
+                .pop()
+                .pop()
+                .end();
+
+    function rotate() {
+        console.log('rotate entering...')
+        move("#rotate .square")
+            .rotate(120)
+            .end();
+    }
+
+
+</script>
 
 </body>
 </html>

@@ -41,6 +41,10 @@ Easing functions:
 'ease-in-out-back':  'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
 ```
 
+> related file 1: `/public/move-demo.html`
+
+> related file 2: `/public/move-whole-guide.html`
+
 ## 2. normailzr
 
 
