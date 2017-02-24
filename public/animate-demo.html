@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animate CSS demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div>Magic Css Style:</div>
+    <h1 class="animated infinite bounce">我要动起来！(infinite)！！</h1>
+    <h1 id="bounce_h1" class="animated bounce">我要动起来！！！</h1>
+    <span class="animated infinite bounce">我要动起来！(I am span tag)！！</span>
+
+    <h1 id="bounce_h1_2" class="animated bounce">我要 2s 后动起来！！！</h1>
+</div>
+
+<script>
+    // Check if the DOMContentLoaded has already been completed
+    if (document.readyState === 'complete' || document.readyState !== 'loading') {
+        eventHandler();
+    } else {
+        document.addEventListener('DOMContentLoaded', eventHandler);
+    }
+
+    /**
+     * this function will run when the DOM has been loaded successfully.
+     */
+    function eventHandler() {
+        console.log('eventHandler coming.....');
+
+        setTimeout(function () {
+            document.querySelector("#bounce_h1_2").classList.add('bounceOutLeft');
+        }, 2000);
+
+
+        // detect when an animation ends:
+        // care about compatibility of different Browsers:
+        //      'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+        var eventName = 'animationend';
+        document.querySelector("#bounce_h1").addEventListener(eventName, function () {
+            alert(' "#bounce_h1" run complete!!!!')
+            this.classList.remove('bounce');
+        })
+    }
+</script>
+
+</body>
+</html>

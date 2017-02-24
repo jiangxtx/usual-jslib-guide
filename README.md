@@ -1,7 +1,7 @@
 # usual-jslib-guide
 针对第三方 JavaScript 库的一个学习指导项目。搜集的这类第三方库遵循越小越好、越独立越好的原则，方便项目移植与整合。
 
-### 1、Move.js
+## 1、Move.js
 CSS3 JavaScript animation framework.
 
 Move.js is a small JavaScript library making CSS3 backed animation extremely simple and elegant.
@@ -40,3 +40,11 @@ Easing functions:
 'ease-in-out-circ':  'cubic-bezier(0.785, 0.135, 0.150, 0.860)'
 'ease-in-out-back':  'cubic-bezier(0.680, -0.550, 0.265, 1.550)'
 ```
+
+## 2、normailzr
+
+
+## Animate.css
+
+animate.css is a bunch of cool, fun, and cross-browser animations for you to use in your projects. Great for emphasis, home pages, sliders, and general just-add-water-awesomeness.
+
