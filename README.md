@@ -53,3 +53,15 @@ Easing functions:
 animate.css is a bunch of cool, fun, and cross-browser animations for you to use in your projects. Great for emphasis, home pages, sliders, and general just-add-water-awesomeness.
 
 > related file: `/public/animate-demo.html`
+
+## 4. Particles.js
+
+A lightweight JavaScript library for creating particles.
+
+Generally speaking, it just looks like the background-Show of ZhiHu web.
+
+> related file: `/public/particles-demo.html`
+>
+> github address: https://github.com/VincentGarreau/particles.js
+
+
