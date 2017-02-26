@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animate.CSS demo</title>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">-->
+    <script src="../lib/jquery-2.1.4.js"></script>
+    <style>
+        .space-1 {
+            margin: auto 20%;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span class="animated bounce">我要动起来！why I can't move！(Element that isn't block wouldn't be moved)！</span>
+        <div class="animated bounce">我要动起来！！！</div>
+    </div>
+    <h1 class="animated bounce">我要动起来！only once！！</h1>
+    <h1 class="animated infinite bounce">我要动起来！loop for ever！just love！</h1>
+    <h1 class="animated infinite bounceIn">我要动起来！</h1>
+    <div class="space-1">
+        <h1 id="id_1" class="">我要动起来！</h1>
+        <button onclick="fadeInupBig()">动起来</button>
+    </div>
+    <script>
+        function fadeInupBig() {
+            $("#id_1").addClass('animated fadeInUpBig')
+                // detect when an animation ends
+                .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $(this).removeClass('animated fadeInUpBig')
+                })
+        }
+    </script>
+</body>
+</html>

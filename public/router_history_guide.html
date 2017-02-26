@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Front-Web Router Demo</title>
+    <style>
+        #coord {
+            color: red;
+        }
+        .h-sub {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Do You Know Front-Web-Router ?
+        <sub class="h-sub">And do you want to explore that magical principle?</sub>
+    </h1>
+    <h3>Here is a demo from Mozilla Officially! Just click it, and NOTE url in your browser.
+        Find some amazing things beyond your imagination?
+    </h3>
+    <p>You are at coordinate <span id="coord">5</span> on the line!</p>
+    <p>
+        <a href="?x=6" onclick="goPushState(1);return false;">Advance to 6</a> OR
+        <a href="?x=4" onclick="goPushState(-1);return false;">Retreat to 4</a>
+    </p>
+    <div>
+        <button onclick="back();">BACK(console)</button>
+        <button onclick="go();">GO1(console)</button>
+    </div>
+
+    <script>
+        var currentPage = 5;
+        alert('current Page is: ' + currentPage)
+        function goPushState(step) {
+            setupPage(currentPage + step)
+            window.history.pushState({currentPage: currentPage}, document.title, '?x=' + currentPage)
+        }
+        function back() {
+            window.history.back();
+        }
+        function go() {
+            window.history.go(1)
+        }
+        function setupPage(page) {
+            currentPage = page;
+            document.title = 'Line Game = ' + currentPage
+            document.getElementById('coord').textContent = currentPage
+            document.links[0].href = '?x=' + (currentPage + 1)
+            document.links[0].textContent = 'Advance to ' + (currentPage + 1)
+            document.links[1].href = '?x=' + (currentPage - 1)
+            document.links[1].textContent = 'Retreat to ' + (currentPage - 1)
+        }
+
+        /**
+         * A popstate event is dispatched to the window every time the active history entry changes
+         * between two history entries for the same document.
+         * If the history entry being activated was created by a call to history.pushState() or was
+         * affected by a call to history.replaceState(), the popstateevent's state property contains
+         * a copy of the history entry's state object.
+         *
+         * Note that just calling history.pushState() or history.replaceState() won't trigger apopstate
+         * event. The popstate event is only triggered by doing a browser action such as clicking on the
+         * back button (or calling history.back() in JavaScript). And the event is only triggered when
+         * the user navigates between two history entries for the same document.
+         *
+         * Browsers tend to handle the popstate event differently on page load. Chrome (prior to v34) and
+         * Safari always emit a popstate event on page load, but Firefox doesn't.
+         */
+        window.onpopstate = function (event) {
+            console.log('popState changes: ', event)
+            setupPage(event.state.currentPage)
+        }
+
+        /**
+         * The 'hashchange' event is fired when the fragment identifier of the URL has changed (the part of the URL that
+         * follows the # symbol, including the # symbol).
+         * JS通过hashChange事件来监听url的改变，IE7及以下需要用轮询。
+         */
+        window.onhashchange = function (event) {
+            console.log('hash changes: ', event)
+            setupPage(event.state.currentPage)
+        }
+
+        /**
+         * 路由大概的实现过程：
+         *     可以这么理解， 对于高级浏览器，利用H5的新Api做好页面上不同板块ajax等操作与url的映射关系，甚至可以自己用
+         * javascript书写一套历史栈管理模块，从而绕过浏览器自己的历史栈。而当用户的操作触发popstate时，可以判断此时的url与板块的映射关系，从
+         * 而加载对应的ajax板块。这样你就可以把一个具有很复杂ajax版面结构页面的url发送给你的朋友了，而你的朋友在浏览器中打开这个链接时，前端路
+         * 由系统url和板块映射关系会解析并还原出整个页面的原貌！一般SPA（单页面应用）和一些复杂的社交站应用，会普遍拥有自己的前端路由系统。
+         *
+         * 正常情况下，URL中的”/”一般是server端路由采用的标记，而”?”或者”#”再或者”#!”，则一般为前端路由采用的开始标记，我们可以在这些符号后
+         * 边，通过键值对的形式，描述一个页面具有哪些板块配置信息。也不乏有的网站为了美观，前后端共用”/”进行路由索引。
+         *
+         * 几种可行的路由方案：
+         *      1. H5+hash方案：兼容所以浏览器，又照顾到了高级浏览器应用新特性。
+         *      2. 纯H5方案：表示IE是谁，我不认识-_-"，这套方案应用纯H5的新特性，URL随心定制。
+         *      3. 纯Hash方案：其实一开始我是拒绝的，可是...可是...duang...IE~~:)
+         *
+         * 开发一个前端路由，主要考虑到页面的可插拔、页面的生命周期、内存管理等。
+         */
+    </script>
+</body>
+</html>

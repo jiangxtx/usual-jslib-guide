@@ -53,7 +53,7 @@ Easing functions:
 animate.css is a bunch of cool, fun, and cross-browser animations for you to use in your projects. Great for emphasis, home pages, sliders, and general just-add-water-awesomeness.
 
 > related file: `/public/animate-demo.html`
-
+> related file: `/public/animate.css-demo.html`
 ## 4. Particles.js
 
 A lightweight JavaScript library for creating particles.
@@ -64,4 +64,13 @@ Generally speaking, it just looks like the background-Show of ZhiHu web.
 >
 > github address: https://github.com/VincentGarreau/particles.js
 
+## 5. Immutable.js
+
+> related file: `/public/immutable-demo.html`
+
+## router_history_guide
+
+Extremly important, especially for front-router learning!
+
+> related file: `router_history_guide.html`
 

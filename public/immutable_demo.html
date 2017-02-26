@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Immutable Demo</title>
+</head>
+<body>
+    <h1>Immutable Demo</h1>
+    <p>Warm-tips: please open your console to find something usefully!</p>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.1/immutable.js"></script>-->
+    <script src="../node_modules/immutable/dist/immutable.min.js"></script>
+    <script>
+        let map1 = Immutable.Map({a: {name: 'jiangxtx', age: 28}, b: 2, c: 3})
+        let map2 = map1.set('b', 'you-know')
+
+        console.log('map1: ', map1)
+        console.log('map2: ', map2)
+        console.log(map1.equals(map2), Immutable.is(map1, map2))
+        const map1_a = map1.get('a'),
+            map2_a = map2.get('a');
+        console.log('value of a: ', map1_a, map2_a, map1_a === map2_a)
+
+        let map3 = map1.set('a', {name: 'jiangxtxx', age: 280})
+        let map4 = map1.set('a', {name: 'jiangxtxx', age: 280})
+        const map3_a = map3.get('a')
+        console.log('map3: ', map3)
+        console.log('value of a1: ', map3_a, map2_a, map3_a === map2_a)
+
+        // it's important to use the Immutable.is() function or .equals() method to determine value equality
+        // instead of the === operator which determines object reference identity.
+        console.log('Different compare: ', Immutable.is(map3, map4), map3===map4, map3.equals(map4))
+        console.log('Different compare: ',
+            Immutable.is(map3.get('a'), map4.get('a')),
+            map3.get('a').name===map4.get('a').name,
+            map3.get('b')===map4.get('b')
+        )
+
+        let clone_map1 = map1;
+        clone_map1.set('c', 333);
+        console.log('conle_map1: ', Immutable.is(clone_map1, map1), clone_map1.get('c'))
+
+    </script>
+</body>
+</html>
