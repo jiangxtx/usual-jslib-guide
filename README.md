@@ -68,9 +68,15 @@ Generally speaking, it just looks like the background-Show of ZhiHu web.
 
 > related file: `/public/immutable-demo.html`
 
-## router_history_guide
+## 6. router_history_guide
 
 Extremly important, especially for front-router learning!
 
 > related file: `router_history_guide.html`
+
+## 7. Marked.js
+
+Markdown style textarea.
+
+> related file: `public/Marked-highlight.html`;
 
