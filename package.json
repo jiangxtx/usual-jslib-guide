@@ -22,6 +22,7 @@
   "homepage": "https://github.com/jiangxtx/usual-jslib-guide#readme",
   "dependencies": {
     "immutable": "^3.8.1",
+    "marked": "^0.3.6",
     "move-js": "^0.5.0",
     "normalizr": "^3.2.1",
     "particles.js": "^2.0.0"

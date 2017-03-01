@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Demo</title>
+
+    <script src="../node_modules/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        .flex-container {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-flow: row wrap;
+            justify-content: space-around;
+        }
+        .flex-item {
+            border: 1px solid tomato;
+            padding: 5px;
+            width: 40%;
+            height: 350px;
+            margin-top: 10px;
+            overflow: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1 style="text-align: center;color: red;margin: 5px;">
+    Q: 如何使让你的网站支持 Markdown ?</h1>
+
+<div>
+    <h2>几点说明：</h2>
+    <ul>
+        <li>1. Marked.js作用：解析markdown语法为HTML.</li>
+        <li>2. highlight.js作用：将HTML中代码高亮显示，这样更美观.</li>
+    </ul>
+</div>
+
+
+<h2>自制 Markdown 编辑器：</h2>
+<div class="flex-container">
+    <div class="flex-item">
+        <textarea name="markdown" id="markdown" cols="50"
+                  rows="20"
+                  oninput="updateContent();"
+                  placeholder="Please input your content..."># Markdown Title</textarea>
+    </div>
+    <div class="flex-item">
+        <div id="preview"></div>
+    </div>
+</div>
+
+<script>
+    var renderMD = new marked.Renderer();
+    marked.setOptions({
+        renderer: renderMD,
+        gfm: true,
+        tables: true,
+        breaks: true,
+        pedantic: false,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        }
+    });
+
+    console.log(marked('I am using __markdown__.'));
+
+    function updateContent() {
+        var inputVal = document.getElementById("markdown").value;
+        console.log('textarea input: ' + inputVal)
+
+        document.getElementById("preview").innerHTML = marked(inputVal);
+    }
+
+    var initContent = '# Markdown Title \n' +
+        '## 标题二 \n' +
+        '**加粗了我** \n' +
+        '*夕阳斜下* \n' +
+        '你也来试试吧..... \n';
+    initContent += `
+        \`\`\`js
+    console.log('we')
+    console.log(marked('I am using __markdown__.'));
+
+    function updateContent() {
+        var inputVal = document.getElementById("markdown").value;
+        console.log('textarea input: ' + inputVal)
+
+        document.getElementById("preview").innerHTML = marked(inputVal);
+    }
+    \`\`\`
+`;
+    document.getElementById("markdown").value = initContent;
+    updateContent();
+
+</script>
+
+</body>
+</html>
