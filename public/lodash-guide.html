@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lodssh Guide</title>
+
+    <script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div>
+    <h1>lodash guide</h1>
+
+    <h3>lodash guide: throttle</h3>
+    <div>
+        <button id="btn-throttle">连续点击试试1</button>
+        <span id="btn-throttle-count"> 0 </span> times.
+    </div>
+
+    <div>
+        <button id="btn-throttle-2">连续点击试试2</button>
+        <span id="btn-throttle-count-2"> 0 </span> times.
+    </div>
+
+    <h3>lodash guide: debounce</h3>
+    <div>
+        <button id="btn-debounce">连续点击试试3</button>
+        <span id="btn-debounce-count"> 0 </span> times.
+    </div>
+
+</div>
+
+<script>
+    var count = 0;
+    $('#btn-throttle').click(_.throttle(function () {
+        console.log(`you click me for ${count++} times!`);
+        $('#btn-throttle-count').html(count)
+    }, 1000, {
+        leading: true,
+        trailing: false
+    }));
+
+    var count0 = 0;
+    $('#btn-throttle-2').click(function () {
+        console.log(`you click me for ${count0++} times!`);
+        $('#btn-throttle-count-2').html(count0)
+    });
+
+    $(function () {
+        var count = 0;
+        var showLog = function () {
+            console.log(`you click me for ${count++} times!`);
+            $('#btn-debounce-count').html(count)
+        }
+        $('#btn-debounce').on('click', _.debounce(showLog, 1000))
+    })
+</script>
+
+</body>
+</html>
