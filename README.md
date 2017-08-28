@@ -68,3 +68,10 @@ Markdown style textarea.
 
 > github address:　https://github.com/alvarotrigo/fullPage.js
 
+## 9. lodash.js
+
+A strong 3th library for javascript.
+
+> related file: `public/lodash-guide.html`;
+
+
