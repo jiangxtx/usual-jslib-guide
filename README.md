@@ -68,6 +68,3 @@ Markdown style textarea.
 
 > github address:　https://github.com/alvarotrigo/fullPage.js
 
-
-
-

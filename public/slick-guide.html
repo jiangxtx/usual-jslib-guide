@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slick lib Demo</title>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+
+    <script src="../lib/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+    <style>
+        #slick-demo1 h3 {
+            background-color: yellow;
+            margin: 10px 15px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="slick-demo1" data-slick='{}'>
+    <div><h3>1</h3></div>
+    <div><h3>2</h3></div>
+    <div><h3>3</h3></div>
+    <div><h3>4</h3></div>
+    <div><h3>5</h3></div>
+    <div><h3>6</h3></div>
+    <div><h3>7</h3></div>
+    <div><h3>8</h3></div>
+    <div><h3>9</h3></div>
+    <div><h3>10</h3></div>
+</div>
+
+<script>
+    $(function () {
+        // On swipe event
+        $('#slick-demo1').on('swipe', function(event, slick, direction){
+            console.log('swipe: ', direction);
+            // left
+        });
+
+        // On edge hit
+        $('#slick-demo1').on('edge', function(event, slick, direction){
+            console.log('edge was hit', direction)
+        });
+
+        // On before slide change
+        $('#slick-demo1').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            console.log('beforeChange: ', nextSlide);
+        });
+
+        $('#slick-demo1').slick({
+            autoplay: true,
+            "slidesToShow": 4,
+//            "slidesToScroll": 4,
+
+            // normal options...
+            infinite: false,
+
+            // the magic
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+            }, {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    dots: true
+                }
+            }, {
+                breakpoint: 300,
+                settings: "unslick" // destroys slick
+            }]
+        });
+    });
+</script>
+
+</body>
+</html>
