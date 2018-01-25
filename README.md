@@ -74,4 +74,8 @@ A strong 3th library for javascript.
 
 > related file: `public/lodash-guide.html`;
 
+## 10. zeptop.js
 
+类似于jquery的移动端库。功能可与jquery兼容。
+
+> related file: `public/zepto-learn.html`

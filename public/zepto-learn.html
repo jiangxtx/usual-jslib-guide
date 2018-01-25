@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zepto Study</title>
+</head>
+<body>
+
+<h1>Welcome to study zepto lib.</h1>
+<div id="root">I am root DOM.
+    <div class="item">
+        To be, or not to be.
+        <div class="item-say">
+            >>> to say.....
+        </div>
+    </div>
+    <div class="item">
+        That is a big question.
+    </div>
+    <div class="item">
+        So, waiting for what? Just do it!
+    </div>
+</div>
+
+<input type="text" id="name" value="" />
+<span id="name_valid" style="display: none;">输入字符不能超过 20 字！</span>
+
+
+<script src="../lib/zepto.min.js"></script>
+<script>
+
+    $('<p />', {
+        text: 'Hello jiangxtx',
+        id: 'welcome',
+        css: { color: 'red' }
+    })
+
+    Zepto(function ($) {
+        console.log('Ready to Zepto!!')
+        console.log('camelCase use: ', $.camelCase('helllo-jiangxtx'))
+        console.log('camelCase use: ', $.camelCase('hellloJiangxtx1'))
+        console.log('camelCase use: ', $.camelCase('helllo_jiangxtx2'))
+        console.log('camelCase use: ', $.camelCase('helllojiangxtx3'))
+
+        $('#root').after('<p>A note below the root dom.</p>')
+
+        var tosay = $('.item-say')
+        var colsestTosay = tosay.closest('div.item')
+        console.log('colsestTosay: ', colsestTosay)
+
+        var input = $('#name')
+        input.on('change', function (e) {
+            console.log('change: ', e.target.value)
+            $("#name_valid").toggle(input.val().length > 20)
+        })
+
+        console.log('detect judge: ', $.browser)
+
+    })
+
+</script>
+</body>
+</html>
