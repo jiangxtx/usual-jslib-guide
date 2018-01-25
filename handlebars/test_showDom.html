@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Handlebars demo</title>
+    <script src="./jquery-1.12.0.min.js" ></script>
+    <script src="../node_modules/handlebars/dist/handlebars.min.js" ></script>
+    <script type="text/javascript" src="./test_showDom.js"></script>
+    <style type="text/css"></style>
+</head>
+<body>
+<h2>Simple handlebars demo</h2>
+<button id="btn_simple">Click me</button>
+<div id="my_div">
+
+</div>
+<h2>Handlebars Helpers demo</h2>
+<button id="btn_helper">Click me</button>
+<div id="helper_div">
+
+</div>
+<script id="some-template" type="text/x-handlebars-template">
+    <table>
+        <thead>
+        <th>Username</th>
+        <th>Real Name</th>
+        <th>Email</th>
+        </thead>
+        <tbody>
+        {{#if users}}
+        <tr>
+            <td>{{username}}</td>
+            <td>{{firstName}} {{lastName}}</td>
+            <td>{{email}}</td>
+        </tr>
+        {{else}}
+        <tr>
+            <td colspan="3">NO users!</td>
+        </tr>
+        {{/if}}
+        </tbody>
+    </table>
+</script>
+<script id="helper-template" type="text/x-handlebars-template">
+    <div>
+        <h1>By {{fullName author}}</h1>
+        <div>{{body}}</div>
+
+        <h1>Comments</h1>
+
+        {{#each comments}}
+        <h2>By {{fullName author}}</h2>
+        <div>{{body}}</h2>
+            {{/each}}
+        </div>
+</script>
+</body>
+</html>
+

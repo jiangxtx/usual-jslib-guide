@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handlebar 测试</title>
+    <script src="./jquery-1.12.0.min.js" ></script>
+    <script src="../node_modules/handlebars/dist/handlebars.min.js" ></script>
+    <style>
+        .desp {
+            font-style: italic;
+            color: red;
+        }
+        .modal {
+            margin: 5px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+
+<p>Welcome to Handlebar's world!</p>
+<div id="content"></div>
+<div id="content2"></div>
+
+<!-- 建立一个HTML模板 -->
+<script id="template_1" type="text/x-handlebars-template">
+<div id="" class="demo" >
+
+    <div class="demo">
+        <h1>{{name}}</h1>
+        <p>{{content}}</p>
+        <p>{{{domContent}}}</p>
+    </div>
+
+    <div class="demo">
+        <div class="desp">以下展示 Block表达式：</div>
+        <ul>
+            {{#program}}
+            <li>{{language}}</li>
+            {{/program}}
+        </ul>
+    </div>
+
+    <!-- 内置的each就是为了遍历数组用的，更复杂的数据也同样适用。-->
+    <div class="demo">
+        <div class="desp">以下展示 each block helper：</div>
+        <ul>
+            {{#each program}}
+            <li>{{language}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <!-- 内置的each就是为了遍历数组用的，更复杂的数据也同样适用。-->
+    <div class="demo">
+        <div class="desp">以下展示 if else block helper：</div>
+        {{#if list}}
+        <ul id="list">
+            {{#each list}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+            <p>{{error}}</p>
+        {{/if}}
+
+        {{#if list_1}}
+        <ul id="list_1">
+            {{#each list_1}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>{{error}}</p>
+        {{/if}}
+    </div>
+
+    <!-- 使用with的方法，我们可以将context转移到数据的一个section里面（如果你的数据包含section）。
+         这个方法在操作复杂的template时候非常有用。 -->
+    <div class="demo entry">
+        <div class="desp">以下展示 with block helper：</div>
+        <h1>{{withData.title}}</h1>
+        {{#with withData.author}}
+        <h2>By {{firstName}} {{lastName}}</h2>
+        <h4>{{ ../title }}</h4>
+        {{/with}}
+    </div>
+
+</div>
+</script>
+
+<hr />
+
+<!-- 建立第二个模板
+!Helpers是Handlebars中最重要的概念，它能大大扩展Handlebars的使用范围，
+        Helper自定义函数的形式将所需要的功能注册为表达式，然后可以在Handlebars中使用。
+        Handlebars提供了Handlebars.registerHelper方法来自定义Helper，同时也提供了一些常用的内建Helper。-->
+<script id="tp_2" type="text/x-handlebars-template">
+    <div id="{{idName}}" class="demo {{className}}">
+        <h1>{{title}}</h1>
+        <p>{{content.title}}</p>
+        <h3 data-value="h3" onclick="{{h3Click}}">{{ fullName content }}</h3>
+        <div>
+            This will show you a formatNumber():
+            <p>{{formatNumber 3460934806309480925}}</p>
+            <p>{{#if_even number}}
+                {{this.number}} is even;
+                {{else}}
+                {{this.number}} is odd.
+                {{/if_even}}
+            </p>
+
+        </div>
+    </div>
+</script>
+
+<script >
+    $(function () {
+        //用jquery获取模板
+        var source   =  $("#template_1").html();
+        //预编译模板
+        var template = Handlebars.compile(source);
+        //模拟json数据
+        var context = {
+            name: "jiangxtx",
+            content: "learn Handlebars",
+            domContent: "<p>This is a post about &lt;p&gt; tags</p>",
+            program: [
+                { language: 'Javascript'},
+                { language: 'HTML'},
+                { language: 'CSS 3.0'}
+            ],
+            list: ['apple', 'sugar', 'banana'],
+            error: 'data request error',
+            withData: {
+                title: 'with test title ',
+                author: {
+                    firstName: 'Xia',
+                    lastName: 'jiujiang'
+                }
+            }
+        };
+        //匹配json内容
+        var html = template(context);
+        //输入模板
+        $('#content').html(html);
+    });
+
+    Handlebars.registerHelper('fullName', function (content) {
+        return 'Xia ' + content.name;
+    });
+    Handlebars.registerHelper('formatNumber', function(num) {
+        num = num + '';
+        return num.replace(/(?=(?!^)(?:\d{3})+(?:\.|$))(\d{3}(\.\d+$)?)/g,',$1');
+    });
+    //判断是否是偶数
+     Handlebars.registerHelper('if_even', function(value, options) {
+         console.log('value:', value); // value: 2
+          console.log('this:', this); // this: Object {num: 2}
+          console.log('fn(this):', options.fn(this)); // fn(this): 2是偶数
+          if((value % 2) == 0) {
+              return options.fn(this);
+          } else {
+              return options.inverse(this);
+          }
+     });
+
+    var tmp2 = $("#tp_2").html();
+    $('#content2').html(Handlebars.compile(tmp2)({
+        title: 'js in Html about Handlebars',
+        content : {
+            title: 'I am content title',
+            name: 'jiujiang'
+        },
+        number: 230.8
+    }));
+
+    $('body').append(Handlebars.compile(tmp2)({
+        title: 'a new world!!',
+        content : {
+            title: 'I am content XXXX',
+            name: 'jiangxtx JJ'
+        },
+        idName: 'modal_addManager',
+        className: 'item-info modal',
+        h3Click: 'click4h3(this)'
+    }));
+
+    var click4h3 = function (obj) {
+        console.info(obj)
+        alert('I am clicked!' + $(obj).attr('data-value'));
+    };
+
+
+</script>
+
+</body>
+</html>
